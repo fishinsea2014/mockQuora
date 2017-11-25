@@ -1,0 +1,13 @@
+{
+    "name": "qsg/01_mock_quora",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jason Qu",
+            "email": "fishinsea2014@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}
