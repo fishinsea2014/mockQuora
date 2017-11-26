@@ -33,3 +33,8 @@ Route::any('api/login',function (){
     return user_ins()->login();
 });
 
+Route::any('api/logout',function (){
+    return user_ins()->log_out();
+
+});
+

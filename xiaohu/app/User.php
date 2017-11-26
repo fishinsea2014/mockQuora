@@ -99,4 +99,20 @@ class User extends Authenticatable
 //        dd(session()->all());
         return ['status'=>1, 'id'=>$user->id];
     }
+
+    //Log out a user
+    public function log_out(){
+//        session()->flush ();
+        //delete username and userid from session
+        session()->forget('username');
+        session()->forget('userid');
+        return ['status'=>1,];
+//        return redirect('/');
+//        dd(session()->all());
+    }
+
+    //Check a user has loged in or not.
+     public function is_log_in(){
+        return session('user_id')?:false;
+     }
 }
