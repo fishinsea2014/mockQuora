@@ -53,3 +53,34 @@ Route::any('api/question/add',function(){
 Route::any('api/question/change',function(){
     return question_ins()->change();
 });
+
+Route::any('api/question/read',function(){
+    return question_ins()->read();
+});
+
+Route::any('api/question/remove',function(){
+    return question_ins()->remove();
+});
+
+function answer_ins(){
+    return new App\Answer;
+}
+Route::any('api/answer/add',function (){
+   return answer_ins()->add();
+});
+
+Route::any('api/answer/change',function (){
+    return answer_ins()->change();
+});
+
+Route::any('api/answer/read',function (){
+    return answer_ins()->read();
+});
+
+function comment_ins(){
+    return new App\Comment;
+}
+
+Route::any('api/comment/add',function (){
+   return comment_ins()->add();
+});
