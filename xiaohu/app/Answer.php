@@ -89,4 +89,44 @@ class Answer extends Model
         return ['status'=>1,'data'=>$answers];
     }
 
+    //Vote API
+    public function vote(){
+        if(!user_ins()->is_log_in())
+            return ['stauts'=>0,'msg'=>'not log in'];
+
+        if(!rq('id')||!rq('vote'))
+            return ['status'=>0,'msg'=>'id and vote, up or down, is null'];
+
+        $answer=$this->find(rq('id'));
+        if(!$answer)
+            return ['status'=>0,'msg'=>'the answer does not exist'];
+
+        //1 up,2 down
+        $vote=rq('vote')<=1 ? 1:2;
+
+        //Check whether the user vote to same answer, if has been voted, delete previous vote.
+        $answer
+            ->users()
+            ->newPivotStatement()
+            ->where('user_id',session('user_id'))
+            ->where('answer_id',rq('id'))
+            ->delete();
+
+        $answer->users()->attach(session('user_id'),['vote'=>$vote]);
+
+        return['status'=>1];
+
+
+
+
+    }
+
+    //Connect users and   answers table, many to many .
+    public function users(){
+        return $this
+            ->belongsToMany('App\User')
+            ->withPivot('vote')
+            ->withTimestamps();
+    }
+
 }

@@ -115,4 +115,12 @@ class User extends Authenticatable
      public function is_log_in(){
         return session('user_id')?:false;
      }
+
+    //Connect users and   answers table, many to many .
+    public function answers(){
+        return $this
+            ->belongsToMany('App\Answer')
+            ->withPivot('vote')
+            ->withTimestamps();
+    }
 }

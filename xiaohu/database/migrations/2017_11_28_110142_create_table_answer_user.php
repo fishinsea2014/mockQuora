@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableComments extends Migration
+class CreateTableAnswerUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,21 +13,16 @@ class CreateTableComments extends Migration
      */
     public function up()
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('answer_user', function (Blueprint $table) {
             $table->increments('id');
-            $table->text('content');
             $table->unsignedInteger('user_id');
-            $table->unsignedInteger('question_id')->nullable();
-            $table->unsignedInteger('answer_id')->nullable();
-
-            $table->unsignedInteger('reply_to')->nullable();
-
+            $table->unsignedInteger('answer_id');
+            $table->unsignedSmallInteger('vote');
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('question_id')->references('id')->on('questions');
             $table->foreign('answer_id')->references('id')->on('answers');
-            $table->foreign('reply_to')->references('id')->on('comments');
+            $table->unique(['user_id','answer_id','vote']);
         });
     }
 
@@ -38,6 +33,6 @@ class CreateTableComments extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('answer_user');
     }
 }

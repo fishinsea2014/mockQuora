@@ -10,6 +10,13 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+function paginate($page=1,$limit=16){
+    $limit=$limit?:16;
+    $skip=($page?($page-1):0)*$limit;
+    return [$limit,$skip];
+}
+
 function rq($key=null,$default=null){
     if (!$key) return Request::all();
     return Request::get($key,$default);
@@ -77,6 +84,10 @@ Route::any('api/answer/read',function (){
     return answer_ins()->read();
 });
 
+Route::any('api/answer/vote',function (){
+    return answer_ins()->vote();
+});
+
 function comment_ins(){
     return new App\Comment;
 }
@@ -84,3 +95,13 @@ function comment_ins(){
 Route::any('api/comment/add',function (){
    return comment_ins()->add();
 });
+
+Route::any('api/comment/read',function (){
+    return comment_ins()->read();
+});
+
+Route::any('api/comment/remove',function (){
+    return comment_ins()->remove();
+});
+
+Route::any('api/timeline','CommonController@timeline');

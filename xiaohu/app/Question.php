@@ -77,11 +77,15 @@ class Question extends Model
             return ['status'=>1,'data'=>$this->find(rq('id'))];
 
         //If no id in quest, return a number of questions according to the limit of a page
-        $page_items_limit=rq('limit')?:15;
-        $skip=(rq('page')?(rq('page')-1):0)*$page_items_limit;
+//        $page_items_limit=rq('limit')?:15;
+//        $skip=(rq('page')?(rq('page')-1):0)*$page_items_limit;
+
+        //limit is how many items in a page, skip is used to paginate.
+        list($limit,$skip)=pageinate(rq('page'),rq('limit'));
+
         $r=$this
             ->orderBy('created_at')
-            ->limit($page_items_limit)
+            ->limit($limit)
             ->skip($skip)
             ->get(['id','title','desc','user_id','created_at','updated_at'])
             ->keyBy('id');
