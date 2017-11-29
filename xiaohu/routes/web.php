@@ -17,6 +17,17 @@ function paginate($page=1,$limit=16){
     return [$limit,$skip];
 }
 
+function err($msg=[]){
+    return ['status'=>0,'msg'=>$msg];
+}
+
+function suc($data_to_merge=[]){
+    $data=['status'=>1,'data'=>[]];
+    if($data_to_merge)
+        $data=array_merge($data['data'],$data_to_merge);
+    return $data;
+}
+
 function rq($key=null,$default=null){
     if (!$key) return Request::all();
     return Request::get($key,$default);
@@ -47,6 +58,18 @@ Route::any('api/login',function (){
 
 Route::any('api/logout',function (){
     return user_ins()->log_out();
+});
+
+Route::any('api/user/change_password',function (){
+    return user_ins()->change_password();
+});
+
+Route::any('api/user/reset_password',function (){
+    return user_ins()->reset_password();
+});
+
+Route::any('api/user/read',function (){
+    return user_ins()->read();
 });
 
 function question_ins(){

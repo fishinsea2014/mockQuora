@@ -71,9 +71,26 @@ class User extends Authenticatable
 //        dd(Request::get('age'));
 //        dd(Request::has('username'));
 //        dd(Request::all());
-        return 1;
+        return suc();
     }
 
+    //gain the info of a user
+    public function read()
+    {
+        if (!rq('id'))
+            return err('no id');
+        $get = ['id', 'username', 'avatar_url', 'intro'];
+
+        $user = $this->find(rq('id'),$get);
+        $data=$user->toArray();
+        $answer_count=answer_ins()->where('user_id',rq('id'))->count();
+        $question_count=question_ins()->where('user_id',rq('id'))->count();
+        $data['answer_count']=$answer_count;
+        $data['question_count']=$question_count;
+
+
+        return suc($data);
+    }
     //Login api
     public function login(){
         //Check user name and password are not null.
@@ -115,6 +132,46 @@ class User extends Authenticatable
      public function is_log_in(){
         return session('user_id')?:false;
      }
+
+     //Change password
+    public function change_password(){
+        if(!$this->is_log_in()) {
+            return ['status' => 1, 'msg' => 'not login.'];
+        }
+
+        if(!rq('old_password')||!rq('new_password'))
+            return ['status'=>0, 'msg'=>'no old or new password.'];
+
+        $user = $this->find(session('user_id'));
+//        dd($user->all());
+
+        if (!Hash::check(rq('old_password'),$user->password))
+            return ['status'=>0,'msg'=>'incorrect old password.'];
+
+        $user->password = bcrypt(rq('new_password'));
+        return $user->save()?
+            ['status'=>1]:
+            ['status'=>0,'msg'=>'save new passowrd to db failed.'];
+    }
+
+
+
+    //Reset password
+    public function reset_password(){
+
+        //use phone to reset password.
+        if (rq('phone')){
+            return err('phone is missed.');
+        }
+
+        //Check has phone info or not
+        $exists_phone=$this->where('phone',rq('phone'))->exists();
+
+        if(!$exists_phone)
+            return err('no phone info in database');
+
+        return 'reset password';
+    }
 
     //Connect users and   answers table, many to many .
     public function answers(){
