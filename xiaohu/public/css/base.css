@@ -1,6 +1,11 @@
 body{
     background: bisque;
 }
+
+h1{
+    margin-top:0;
+    font-size:18;
+}
 .fl{
     float:left;
 }
@@ -18,8 +23,13 @@ body{
 }
 
 .navbar{
-    background: rgba(0,0,0,0.1);
+    background: #a10;
 }
+
+a {
+    font-color
+}
+
 
 .navbar .brand{
     font-size: 20px;
@@ -53,6 +63,43 @@ body{
     margin-right:auto;
 }
 
+.container.signup,
+.container.login,
+.container.resetpassword{
+    width:400px;
+
+}
+
 [ui-sref]{
     cursor:pointer;
+}
+
+form,
+label{
+    display:block;
+}
+
+label{
+    margin:4px 0;
+}
+
+.input-error-set{
+    color:#ac2925;
+}
+
+.card{
+    display:block;
+    padding:10px 6px;
+    border-radius:4px;
+    background:#ffffff;
+    box-shadow:0 1px 2px 1px rgba(0,0,0,1);
+}
+
+input{
+    width:100%;
+    border:1px solid lavender;
+}
+
+.input-group{
+    margin-bottom: 4px;
 }

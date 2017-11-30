@@ -47,18 +47,19 @@
     </script>
 
     <script type="text/ng-template" id="signup.tpl">
-        <div ng-controller="UserSignupController" class="home container">
+        <div ng-controller="UserSignupController" class="signup container">
             <div class="card">
                 <h1>Sign Up</h1>
                 [:User.signup_data:]
                 <form name="signup_form" ng-submit="User.signup()">
-                    <div>
+                    <div class="input-group">
                         <label>User Name:</label>
                         <input name="username"
                                type="text"
                                ng-minlength="4"
                                ng-maxlength="16"
                                ng-model="User.signup_data.username"
+                               ng-model-options="{debounce:500}"
                                required
                         >
                         <div class="input-error-set">
@@ -68,7 +69,7 @@
                         </div>
                     </div>
 
-                    <div>
+                    <div class="input-group">
                         <label>Password:</label>
                         <input name="password"
                                type="password"

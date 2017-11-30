@@ -64,6 +64,10 @@ Route::any('api/user/change_password',function (){
     return user_ins()->change_password();
 });
 
+Route::any('api/user/exist',function (){
+    return user_ins()->exist();
+});
+
 Route::any('api/user/reset_password',function (){
     return user_ins()->reset_password();
 });

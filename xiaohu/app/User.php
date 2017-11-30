@@ -180,4 +180,16 @@ class User extends Authenticatable
             ->withPivot('vote')
             ->withTimestamps();
     }
+
+    public function questions(){
+        return $this
+            ->belongsToMany('App\Question')
+            ->withPivot('vote')
+            ->withTimestamps();
+    }
+
+    public function exist()
+    {
+        return suc($this->where(rq())->count());
+    }
 }
