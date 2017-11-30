@@ -12,27 +12,80 @@
         <script src="js/base.js"></script>
     </head>
 <body>
-<div class="navbar">
-    <a href="" ui-sref="home"> Home Page</a>
-    <a href="" ui-sref="login">Log In</a>
+<div class="navbar clearfix">
+    <div class="fl">
+        <div class="navbar-item brand">Quora</div>
+        <div class="navbar-item">
+            <input type="text"/>
+        </div>
+    </div>
+    <div class="fr">
+        <div ui-sref="home" class="navbar-item">Home</div>
+        <div ui-sref="login" class="navbar-item">Login</div>
+        <div ui-sref="signup" class="navbar-item">Signup</div>
+    </div>
 </div>
-<div>
+
+<div class="page">
     <div ui-view></div>
 </div>
 
 </body>
 
 <script type="text/ng-template" id="home.tpl">
-    <div>
-        <h1>Home page tpl</h1>
-        home page
-    </div>
+<div class="'home container">
+    this is quora home page.
+    this is quora home page.
+    this is quora home page.
+</div>
 </script>
 
-<script type="text/ng-template" id="login.tpl">
-    <div>
-        <h1>Log In tpl</h1>
-        log in page
-    </div>
-</script>
+    <script type="text/ng-template" id="login.tpl">
+        <div class="'home container">
+            this is login page.
+        </div>
+    </script>
+
+    <script type="text/ng-template" id="signup.tpl">
+        <div ng-controller="UserSignupController" class="home container">
+            <div class="card">
+                <h1>Sign Up</h1>
+                [:User.signup_data:]
+                <form name="signup_form" ng-submit="User.signup()">
+                    <div>
+                        <label>User Name:</label>
+                        <input name="username"
+                               type="text"
+                               ng-minlength="4"
+                               ng-maxlength="16"
+                               ng-model="User.signup_data.username"
+                               required
+                        >
+                        <div class="input-error-set">
+                            <div ng-if="signup_form.username.$error.required">
+                                The user name is mondatory.
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label>Password:</label>
+                        <input name="password"
+                               type="password"
+                               ng-minlength="4"
+                               ng-maxlength="16"
+                               ng-model="User.signup_data.password"
+                               required
+                        >
+                    </div>
+
+                    <button type="submit"
+                            ng-disabled="signup_form.$invalid">SignUp</button>
+                </form>
+            </div>
+            this is sign up page.
+        </div>
+    </script>
+
+
 </html>
