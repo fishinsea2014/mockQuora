@@ -4,7 +4,7 @@
     angular.module('xiaohu',['ui.router'])
     //Change angular from {{}} to [: :], to avoid the conflict between
     // angular and Laravel
-        .config([
+         .config([
             '$interpolateProvider',
             '$stateProvider',
             '$urlRouterProvider',
@@ -34,26 +34,42 @@
         }])
 
         .service('UserService',[
+            '$state',
             '$http',
-            function ($http) {
+            function ($state,$http) {
                 var me=this;
                 me.signup_data = {};
                 me.signup=function () {
                     console.log('sign up service');
+                    $http.post('/api/signUp',me.signup_data)
+                    .then(function (r) {
+                        console.log('r',r);
+                        if(r.data.status){
+                            me.signup_data={};
+                            $state.go('login');
+                        }
+                    },function (e) {
+                        console.log('e',e);
+                    })
                 }
 
                 me.username_exists=function(){
-                    $http.post('api/user/exists',
-                        {username:me.signup_data.username})
-                        .then(function (r) {
-                            console.log('r',r)
+                    $http.post('api/user/exist',
+                        {username: me.signup_data.username})
+                        .then(function (result1) {
+                            console.log("result : ", result1.data.count);
+                            // console.log('res',result1.data.status);
+                            // console.log('res',result1.data.data.count);
+                            // if(result1.data.status && result1.data.data.count)
+                            if (result1.data.count)
+                                me.signup_username_exists=true;
+                            else
+                                me.signup_username_exists=false;
                         },function (e) {
                             console.log('e',e);
                         })
-
                 }
         }])
-
         .controller('UserSignupController',[
             '$scope',
             'UserService',
@@ -61,8 +77,8 @@
                 $scope.User=UserService;
                 $scope.$watch(function () {
                     return UserService.signup_data;
-                },function (n,o) {
-                    if(n.username !=o.username )
+                },function (newdata,olddata) {
+                    if(newdata.username !==olddata.username )
                         UserService.username_exists();
                 },true);
 

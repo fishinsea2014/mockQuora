@@ -190,6 +190,6 @@ class User extends Authenticatable
 
     public function exist()
     {
-        return suc($this->where(rq())->count());
+        return suc(['count'=>$this->where(rq())->count()]);
     }
 }

@@ -50,7 +50,7 @@
         <div ng-controller="UserSignupController" class="signup container">
             <div class="card">
                 <h1>Sign Up</h1>
-                [:User.signup_data:]
+                [:User.signup_data:], [:User.signup_username_exists:]
                 <form name="signup_form" ng-submit="User.signup()">
                     <div class="input-group">
                         <label>User Name:</label>
@@ -63,9 +63,14 @@
                                required
                         >
                         <div class="input-error-set">
-                            <div ng-if="signup_form.username.$error.required">
+                            <div ng-if="signup_form.username.$error.required && signup_form.username.$touched">
                                 The user name is mondatory.
                             </div>
+
+                            <div ng-if="User.signup_username_exists">
+                                The user name already exist.
+                            </div>
+
                         </div>
                     </div>
 
@@ -78,6 +83,11 @@
                                ng-model="User.signup_data.password"
                                required
                         >
+                        <div class="input-error-set">
+                            <div ng-if="signup_form.password.$error.required && signup_form.username.$touched">
+                                The  is mondatory.
+                            </div>
+                        </div>
                     </div>
 
                     <button type="submit"
