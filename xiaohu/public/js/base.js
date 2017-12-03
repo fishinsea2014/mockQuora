@@ -39,6 +39,7 @@
             function ($state,$http) {
                 var me=this;
                 me.signup_data = {};
+                me.login_data={};
                 me.signup=function () {
                     console.log('sign up service');
                     $http.post('/api/signUp',me.signup_data)
@@ -51,6 +52,22 @@
                     },function (e) {
                         console.log('e',e);
                     })
+                }
+                
+                me.login=function () {
+                    $http.post('api/login',me.login_data)
+                        .then(function (r) {
+                            if (r.data.status){
+                                location.href='/';
+                            }
+                            else{
+                                me.login_failed=true;
+                            }
+                            console.log('login service');
+                        },function (e) {
+                            console.log('e',e)
+                        })
+
                 }
 
                 me.username_exists=function(){
@@ -84,5 +101,12 @@
 
             }
         ])
+
+        .controller('LoginController',[
+            '$scope',
+            'UserService',
+            function ($scope,UserService) {
+            $scope.User=UserService
+        }])
 
 })();

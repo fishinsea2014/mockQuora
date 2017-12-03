@@ -41,8 +41,42 @@
 </script>
 
     <script type="text/ng-template" id="login.tpl">
-        <div class="'home container">
-            this is login page.
+        <div ng-controller="LoginController" class="'login container">
+            <div class="card">
+                <h1>Login</h1>
+                <form name="login_form" ng-submit="User.login()">
+                    <div class="input-group">
+                        <label>User Name: </label>
+                        <input name="username"
+                               type="text"
+                               ng-model="User.login_data.username"
+                               required
+                        >
+
+                    </div>
+
+                    <div class="input-group">
+                        <label>Password: </label>
+                        <input name="password"
+                               type="password"
+                               ng-model="User.login_data.password"
+                               required>
+                    </div>
+                    <div ng-if="User.login_failed" class="input-error-set">
+                        Username or password error.
+                    </div>
+
+
+
+                    <div class="=input-group">
+                        <button type="submit"
+                                ng-disabled="login_form.username.$error.required ||
+                                login_form.password.$error.required">
+                            Login</button>
+                    </div>
+
+                </form>
+            </div>
         </div>
     </script>
 

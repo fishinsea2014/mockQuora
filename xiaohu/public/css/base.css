@@ -103,3 +103,8 @@ input{
 .input-group{
     margin-bottom: 4px;
 }
+
+button[disabled]
+{
+    background:#e3e3e3;
+}
