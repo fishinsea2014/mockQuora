@@ -20,6 +20,10 @@ function paginate($page=1,$limit=16){
 function err($msg=[]){
     return ['status'=>0,'msg'=>$msg];
 }
+//Check a user has loged in or not.
+function is_logged_in(){
+    return session('user_id')?:false;
+}
 
 function suc($data_to_merge=[]){
     $data=['status'=>1,'data'=>[]];

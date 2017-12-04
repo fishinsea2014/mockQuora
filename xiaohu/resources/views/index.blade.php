@@ -15,14 +15,22 @@
 <div class="navbar clearfix">
     <div class="fl">
         <div class="navbar-item brand">Quora</div>
-        <div class="navbar-item">
-            <input type="text"/>
-        </div>
-    </div>
-    <div class="fr">
-        <div ui-sref="home" class="navbar-item">Home</div>
-        <div ui-sref="login" class="navbar-item">Login</div>
-        <div ui-sref="signup" class="navbar-item">Signup</div>
+        <form ng-submit="Question.go_add_question()" id="quick_ask" ng-controller="QuestionAddController">
+            <div class="navbar-item">
+                <input ng-model="Question.new_question.title" type="text"/></div>
+            </div>
+
+            <div class="navbar-item">
+                <button type="submit">Question</button>
+            </div>
+
+        </form>
+
+</div>
+    <div  class="fr">
+        <a ui-sref="home" class="navbar-item">Home</a>
+        <a ui-sref="login" class="navbar-item">Login</a>
+        <a ui-sref="signup" class="navbar-item">Signup</a>
     </div>
 </div>
 
@@ -33,7 +41,7 @@
 </body>
 
 <script type="text/ng-template" id="home.tpl">
-<div class="'home container">
+<div class="home container">
     this is quora home page.
     this is quora home page.
     this is quora home page.
@@ -131,6 +139,35 @@
             this is sign up page.
         </div>
     </script>
+    <script type="text/ng-template" id="question.add.tpl">
+        <div ng-controller="QuestionAddController" class="question-add">
+            <div class="card">
+                <form name="question_add_form"  ng-submit="Question.add()">
+                    <div class="input-group">
+                        <label>Question Title</label>
+                        <input type="text"
+                               name="title"
+                               ng-model="Question.new_question.title"
+                               required>
+                    </div>
 
+                    <div class="input-group">
+                        <label>Question Description</label>
+                        <textarea type="text"
+                                  name="desc"
+                                  ng-model="Question.new_question.desc"
+                                  required>
+                        </textarea>
+                    </div>
 
+                    <div class="input-group">
+                        <button ng-disabled="question_add_form.$invalid"
+                                class="primary"
+                                type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </script>
 </html>

@@ -129,8 +129,8 @@ class User extends Authenticatable
     }
 
     //Check a user has loged in or not.
-     public function is_log_in(){
-        return session('user_id')?:false;
+     public function is_logged_in(){
+        return $this->is_logged_in();
      }
 
      //Change password

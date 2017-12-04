@@ -36,6 +36,10 @@ a {
     margin-top:0;
 }
 
+.navbar form{
+    display: inline-block;
+}
+
 .navbar-item{
     display:inline-block;
     line-height:2;
@@ -64,6 +68,7 @@ a {
 }
 
 .container.signup,
+.container.question-add,
 .container.login,
 .container.resetpassword{
     width:400px;
@@ -95,7 +100,9 @@ label{
     box-shadow:0 1px 2px 1px rgba(0,0,0,1);
 }
 
-input{
+input,
+textarea
+{
     width:100%;
     border:1px solid lavender;
 }
@@ -107,4 +114,8 @@ input{
 button[disabled]
 {
     background:#e3e3e3;
+}
+
+#quick_ask{
+    :30
 }
