@@ -131,8 +131,11 @@
                 }
 
                 me.add=function () {
-                    if(!me.new_question.title)
+                    if(!me.new_question.title) {
+                        console.log('no question title');
                         return;
+                    }
+                    console.log('add a new question');
                     $http.post('/api/question/add',me.new_question)
                         .then(function (r) {
                             console.log('r',r);

@@ -13,6 +13,7 @@
     </head>
 <body>
 <div class="navbar clearfix">
+    <div class="container">
     <div class="fl">
         <div class="navbar-item brand">Quora</div>
         <form ng-submit="Question.go_add_question()" id="quick_ask" ng-controller="QuestionAddController">
@@ -26,7 +27,7 @@
 
         </form>
 
-</div>
+
     <div  class="fr">
         <a ui-sref="home" class="navbar-item">Home</a>
         <a ui-sref="login" class="navbar-item">Login</a>
@@ -34,6 +35,7 @@
     </div>
 </div>
 
+</div>
 <div class="page">
     <div ui-view></div>
 </div>
@@ -147,14 +149,18 @@
                         <label>Question Title</label>
                         <input type="text"
                                name="title"
+                               ng-minlength="5"
+                               ng-maxlength=255"
                                ng-model="Question.new_question.title"
                                required>
                     </div>
 
                     <div class="input-group">
                         <label>Question Description</label>
-                        <textarea type="text"
-                                  name="desc"
+                        <textarea
+                                name="desc"
+                                  ng-minlength="5"
+                                  ng-maxlength="1000"
                                   ng-model="Question.new_question.desc"
                                   required>
                         </textarea>

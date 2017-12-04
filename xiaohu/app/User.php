@@ -135,7 +135,7 @@ class User extends Authenticatable
 
      //Change password
     public function change_password(){
-        if(!$this->is_log_in()) {
+        if(!$this->is_logged_in()) {
             return ['status' => 1, 'msg' => 'not login.'];
         }
 

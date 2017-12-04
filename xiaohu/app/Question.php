@@ -11,7 +11,7 @@ class Question extends Model
     **/
     public function add(){
         //If not login, tips login
-        if (!user_ins()->is_log_in()){
+        if (!user_ins()->is_logged_in()){
             return ['status'=>0,'msg'=>'please login. '];
         }
 
@@ -36,7 +36,7 @@ class Question extends Model
     */
     public function change(){
         //If not login, tips login
-        if (!user_ins()->is_log_in()){
+        if (!user_ins()->is_logged_in()){
             return ['status'=>0,'msg'=>'please login. '];
         }
 
@@ -99,7 +99,7 @@ class Question extends Model
      */
     public function remove(){
         //If not login, tips login
-        if (!user_ins()->is_log_in()){
+        if (!user_ins()->is_logged_in()){
             return ['status'=>0,'msg'=>'please login. '];
         }
 
