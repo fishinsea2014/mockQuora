@@ -16,7 +16,17 @@
     <div class="fl">
         <div class="navbar-item brand">Quora</div>
         <div class="navbar-item">
-            <input type="text"/>
+            <form ng-submit="Question.go_add_question()" id="quick_ask" ng-controller="QuestionAddController">
+                <div class="navbar-item">
+                    <input ng-model="Question.new_question.title" type="text"/>
+                </div>
+
+                <div class="navbar-item">
+                    <button type="submit">Submit Question</button>
+                </div>
+
+            </form>
+
         </div>
     </div>
     <div class="fr">
@@ -132,5 +142,9 @@
         </div>
     </script>
 
+    <script type="text/ng-template" id="question.add.tpl">
+
+        Add a question.
+    </script>
 
 </html>

@@ -31,6 +31,15 @@
                     url:'signup',
                     templateUrl:'signup.tpl'
                  })
+                .state('question',{
+                    abstract:true,
+                    url:'/question',
+                    template:'<div ui-view></div>'
+                })
+                .state('question.add',{
+                    url:'/add',
+                    templateUrl:'question.add.tpl'
+                })
         }])
 
         .service('UserService',[
@@ -107,6 +116,22 @@
             'UserService',
             function ($scope,UserService) {
             $scope.User=UserService
+        }])
+
+        .service('QuestionService',[
+            '$http',
+            function ($http) {
+                var me=this;
+                me.go_add_question=function () {
+                    $state.go('question.add');
+                }
+            }
+        ])
+        .controller('QuestionAddController',[
+            'QuestionService',
+            '$scope',
+            function (QuestionService,$scope) {
+                $scope.Question=QuestionService;
         }])
 
 })();
