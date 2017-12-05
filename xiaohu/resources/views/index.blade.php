@@ -145,19 +145,25 @@
     <script type="text/ng-template" id="question.add.tpl">
         <div ng-controller="QuestionAddController" class="question_add_container">
             <div class="card">
-                <form ng-submit="Question.add()" >
+                <form name="question_add_form" ng-submit="Question.add()" >
                     <div class="input-group">
                         <label>Question Title: </label>
-                        <input type="text" ng-model="Question.new_question.title">
+                        <input type="text"
+                               name="title"
+                               ng-model="Question.new_question.title"
+                               required>
                     </div>
 
                     <div class="input-group">
                         <label>Description: </label>
-                        <textarea type="text" ng-model="Question.new_question.desc"></textarea>
+                        <textarea type="text"
+                                  ng-model="Question.new_question.desc"
+                                  name="desc"
+                                  required></textarea>
                     </div>
 
                     <div class="input-group">
-                        <button type="submit">Submit</button>
+                        <button type="submit" ng-disabled="question_add_form.$invalid">Submit</button>
                     </div>
                 </form>
             </div>

@@ -134,7 +134,12 @@
                     }
                     $http.post('/api/question/add',me.new_question)
                         .then(function (r) {
-                            console.log('r-',r)
+                            console.log('r-',r);
+                            if (r.data.status){
+                                me.new_question={};
+
+                                $state.go('home');
+                            }
                         },function (e) {
 
                         })
