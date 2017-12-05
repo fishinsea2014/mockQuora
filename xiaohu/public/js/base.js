@@ -120,10 +120,24 @@
 
         .service('QuestionService',[
             '$http',
-            function ($http) {
+            '$state',
+            function ($http,$state) {
                 var me=this;
+                me.new_question={};
                 me.go_add_question=function () {
                     $state.go('question.add');
+                }
+
+                me.add=function () {
+                    if (!me.new_question.title){
+                        console.log("no question title")
+                    }
+                    $http.post('/api/question/add',me.new_question)
+                        .then(function (r) {
+                            console.log('r-',r)
+                        },function (e) {
+
+                        })
                 }
             }
         ])

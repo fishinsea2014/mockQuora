@@ -143,6 +143,26 @@
     </script>
 
     <script type="text/ng-template" id="question.add.tpl">
+        <div ng-controller="QuestionAddController" class="question_add_container">
+            <div class="card">
+                <form ng-submit="Question.add()" >
+                    <div class="input-group">
+                        <label>Question Title: </label>
+                        <input type="text" ng-model="Question.new_question.title">
+                    </div>
+
+                    <div class="input-group">
+                        <label>Description: </label>
+                        <textarea type="text" ng-model="Question.new_question.desc"></textarea>
+                    </div>
+
+                    <div class="input-group">
+                        <button type="submit">Submit</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
 
         Add a question.
     </script>

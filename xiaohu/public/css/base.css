@@ -68,6 +68,7 @@ a {
 
 .container.signup,
 .container.login,
+.container.question_add_container,
 .container.resetpassword{
     width:400px;
 
@@ -88,6 +89,15 @@ label{
 
 .input-error-set{
     color:#ac2925;
+}
+
+input,
+textarea{
+    display:block;
+    width:100%;
+    border:1px solid rgba(0,0,0,.1);
+    border-radius:3px;
+    outline:none;
 }
 
 .card{
