@@ -11,6 +11,7 @@ class CommonController extends Controller
         list($limit,$skip)=paginate(rq('page'),rq('limit'));
         //Get question data
         $question=question_ins()
+            ->with('user')
             ->limit($limit)
             ->skip($skip)
             ->orderBy('created_at','desc')
@@ -18,6 +19,8 @@ class CommonController extends Controller
 
         //Get answer data
         $answers=answer_ins()
+            ->with('users') //users who votes
+            ->with('user') //user who answer a question
             ->limit($limit)
             ->skip($skip)
             ->orderBy('created_at','desc')

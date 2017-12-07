@@ -153,4 +153,33 @@
                 $scope.Question=QuestionService;
         }])
 
+        .service('TimelineService',[
+            '$http',
+            function ($http) {
+                var me=this;
+                me.data=[];
+                me.get=function (conf) {
+                    $http.post('/api/timeline',conf)
+                        .then(function (r) {
+                            if(r.data.status)
+                                me.data=me.data.concat(r.data.data);
+                            else
+                                console.error('network error')
+                        },function () {
+                            console.error('error')
+                        })
+                }
+            }
+        ])
+
+        .controller('HomeController',[
+            '$scope',
+        'TimelineService',
+        function ($scope,TimelineService) {
+            $scope.Timeline= TimelineService;
+            TimelineService.get();
+
+
+        }])
+
 })();

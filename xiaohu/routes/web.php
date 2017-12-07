@@ -21,6 +21,12 @@ function err($msg=[]){
     return ['status'=>0,'msg'=>$msg];
 }
 
+//Check a user has loged in or not.
+function is_log_in(){
+//    dd(session('user_id'));
+    return session('user_id')?:false;
+}
+
 function suc($data_to_merge=[]){
     $data=['status'=>1,'data'=>[]];
     if($data_to_merge)

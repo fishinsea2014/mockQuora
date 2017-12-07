@@ -1,6 +1,4 @@
-body{
-    background: bisque;
-}
+
 
 h1{
     margin-top:0;
@@ -64,18 +62,36 @@ a {
     width:600px;
     margin-left:auto;
     margin-right:auto;
+    background:rgba(0,0,0,.1);
 }
 
 .container.signup,
+.container.home,
 .container.login,
 .container.question_add_container,
 .container.resetpassword{
     width:400px;
+}
+
+.container.home{
+    background:#fff ;
+}
+
+.hr{
+    display: block;
+    width: 90%;
+    height:1px;
+    background: #eee;
 
 }
 
 [ui-sref]{
     cursor:pointer;
+}
+
+.home h1{
+    font-size:16;
+    color:#666;
 }
 
 form,

@@ -121,7 +121,12 @@ class Answer extends Model
 
     }
 
-    //Connect users and   answers table, many to many .
+    //Connect the user who answer a question.
+    public function user(){
+        return $this->belongsTo('App\User');
+    }
+
+    //Connect users who vote the question and   answers table, many to many .
     public function users(){
         return $this
             ->belongsToMany('App\User')

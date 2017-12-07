@@ -118,19 +118,26 @@ class User extends Authenticatable
     }
 
     //Log out a user
+
+    /**
+     * @return status is 1
+     */
     public function log_out(){
 //        session()->flush ();
         //delete username and userid from session
+//        dd('User logout');
         session()->forget('username');
-        session()->forget('userid');
-        return ['status'=>1,];
+        session()->forget('user_id');
+//        dd(session()->all());
+        redirect('/');
+        return ['status'=>1];
 //        return redirect('/');
 //        dd(session()->all());
     }
 
     //Check a user has loged in or not.
      public function is_log_in(){
-        return session('user_id')?:false;
+        return is_log_in();
      }
 
      //Change password

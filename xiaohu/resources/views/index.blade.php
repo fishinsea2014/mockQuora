@@ -30,9 +30,14 @@
         </div>
     </div>
     <div class="fr">
-        <div ui-sref="home" class="navbar-item">Home</div>
-        <div ui-sref="login" class="navbar-item">Login</div>
-        <div ui-sref="signup" class="navbar-item">Signup</div>
+        <a ui-sref="home" class="navbar-item">Home</a>
+        @if (is_log_in())
+            <a ui-sref="login" class="navbar-item">User: {{session('username')}}</a>
+            <a href="{{url('api/logout')}}" class="navbar-item">Log Out</a>
+        @else
+            <a ui-sref="login" class="navbar-item">Login</a>
+            <a ui-sref="signup" class="navbar-item">Signup</a>
+        @endif
     </div>
 </div>
 
@@ -43,10 +48,39 @@
 </body>
 
 <script type="text/ng-template" id="home.tpl">
-<div class="'home container">
-    this is quora home page.
-    this is quora home page.
-    this is quora home page.
+<div ng-controller="HomeController" class="home card container">
+    <h1>Newest Update</h1>
+    <div class="item-set">
+        <div ng-repeat="item in Timeline.data" class="item">
+            <div class="vote"></div>
+            <div class="item-content">
+                <h3 class="title">Title: [: item.title:]</h3>
+                <div class="content-owner">Question Owner: [:item.user.username:]</div>
+                <div class="content-main"></div>
+                <div class="action-set">
+                    <div class="comment">COMMENT</div>
+                </div>
+
+                <div class="comment-block">
+                    <div class="hr"></div>
+                    <div class="comment-item-set">
+                        <div class="rect"></div>
+                        <div class="comment-item clearfix">
+                            <div class="user">CUser</div>
+                            <div class="comment-content">
+                                comment content
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+        </div>
+            <div class="hr"></div>
+     </div>
+
+    </div>
 </div>
 </script>
 
